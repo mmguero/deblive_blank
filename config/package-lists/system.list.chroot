@@ -43,9 +43,6 @@ gnupg1
 gnupg2
 gpart
 gparted
-grub-efi-amd64
-grub-efi-amd64-bin
-grub-efi-ia32-bin
 gvfs
 gvfs-backends
 gvfs-daemons
