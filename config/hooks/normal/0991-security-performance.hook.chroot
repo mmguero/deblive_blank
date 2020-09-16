@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# enable firewall, disallow everything in except SSH
+/usr/sbin/ufw --force enable
+/usr/sbin/ufw default deny incoming
+/usr/sbin/ufw default allow outgoing
+/usr/sbin/ufw allow ssh
+
+# enable cryptsetup support on boot
+sed -i "s/#CRYPTSETUP=.*/CRYPTSETUP=y/" /etc/cryptsetup-initramfs/conf-hook
+
+# put sudoers log into its own logfile
+awk 'FNR==NR{ if (/^Defaults/) p=NR; next} 1; FNR==p{ print "Defaults\t!syslog\nDefaults\tlogfile=/var/log/sudo.log" }' /etc/sudoers /etc/sudoers > /tmp/newsudoers
+mv /tmp/newsudoers /etc/sudoers && chmod 440 /etc/sudoers
+cat << 'EOF' > /etc/logrotate.d/sudoers
+/var/log/sudo.log
+{
+  weekly
+  missingok
+  rotate 4
+  compress
+  delaycompress
+  copytruncate
+  minsize 100k
+}
+EOF

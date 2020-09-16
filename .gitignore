@@ -1,0 +1,5 @@
+# build artifacts
+*.iso
+*-build.log
+.vagrant
+/config/packages.chroot/*.deb
