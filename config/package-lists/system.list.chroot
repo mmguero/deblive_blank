@@ -67,6 +67,7 @@ libtool
 libykpers-1-1
 libyubikey0
 libzmq5
+localepurge
 lshw
 lsof
 lvm2
@@ -115,7 +116,6 @@ strace
 sudo
 sysstat
 tar
-terminator
 tmux
 tofrodos
 tree
