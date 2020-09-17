@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# remove development packages
+apt-get -y --purge remove build-essential \
+                    $(dpkg --get-selections | cut -f1 | grep -P -- '-dev(:\w+)?$') || true
+
 # remove unwanted packages
 apt-get -y --purge remove bluez-firmware \
                           cracklib-runtime \
@@ -8,27 +12,13 @@ apt-get -y --purge remove bluez-firmware \
                           ffmpeg \
                           gnome-accessibility-themes \
                           gucharmap \
-                          libasound2-plugins \
-                          libcupsfilters1 \
-                          libcupsimage2 \
-                          libgphoto2-6 \
-                          libgphoto2-port12 \
                           lintian \
                           lxmusic \
                           mailutils \
                           mpv \
-                          pavucontrol \
                           poppler-data \
-                          prelink \
-                          pulseaudio \
-                          python-wicd \
                           smplayer \
                           strace \
-                          wamerican \
-                          wicd \
-                          wicd-daemon \
-                          wicd-gtk \
-                          xdg-user-dirs \
                           yelp \
                           youtube-dl || true
 
